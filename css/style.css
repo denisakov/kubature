@@ -247,6 +247,7 @@ section {
 .footer {
   background-color: #222222;
   color: white;
+  padding: 10px;
 }
 
 
@@ -449,7 +450,7 @@ section {
 .work-items li {
   position: relative;
   overflow: hidden;
-  height: 360px;
+  height: 400px;
 
   /* important because we need to overwrite the default skeleton */
   margin: 0!important;
