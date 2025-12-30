@@ -331,13 +331,13 @@ class ProjectCard extends HTMLElement {
     const now = new Date().getMilliseconds().toString();
     const id = this.getAttribute('title').replace(' ','').toLowerCase().substring(0,10) + now;
 
-    this.shadowRoot.querySelector(".popupTitle").innerHTML = this.getAttribute('title');
-    this.shadowRoot.querySelector(".request").innerHTML = this.getAttribute('request');
-    this.shadowRoot.querySelector(".solution").innerHTML = this.getAttribute('solution');
-    this.shadowRoot.querySelector(".technologies").innerHTML = this.getAttribute('technologies');
-    this.shadowRoot.querySelector(".cost").innerHTML = this.getAttribute('cost');
-    this.shadowRoot.querySelector(".time").innerHTML = this.getAttribute('timePeriod');
-    this.shadowRoot.querySelector(".feedback").innerHTML = this.getAttribute('feedback');
+    this.shadowRoot.querySelector(".popupTitle").innerText = this.getAttribute('title');
+    this.shadowRoot.querySelector(".request").innerText = this.getAttribute('request');
+    this.shadowRoot.querySelector(".solution").innerText = this.getAttribute('solution');
+    this.shadowRoot.querySelector(".technologies").innerText = this.getAttribute('technologies');
+    this.shadowRoot.querySelector(".cost").innerText = this.getAttribute('cost');
+    this.shadowRoot.querySelector(".time").innerText = this.getAttribute('timePeriod');
+    this.shadowRoot.querySelector(".feedback").innerText = this.getAttribute('feedback');
 
     var triggerButton = this.shadowRoot.querySelector("#infoButton");
     var detailsContainer = this.shadowRoot.querySelector('.popupContent');
