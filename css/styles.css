@@ -3,12 +3,14 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 @import url(https://fonts.googleapis.com/css?family=Saira:300,600);
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   color: #777;
   overflow: hidden;
 }
+
 #filterForm {
   font-size: small;
   position: sticky;
@@ -17,10 +19,12 @@ html, body {
   background: #fff;
   padding-bottom: 0.5em;
 }
+
 .footer {
   font-size: small;
   text-align: center;
 }
+
 .pure-img-responsive {
   max-width: 100%;
   height: auto;
@@ -50,14 +54,16 @@ This is the parent `<div>` that contains the menu and the content area.
   display: flex;
   flex-direction: column;
 }
-  #layout.active #menu {
-      left: 150px;
-      width: 150px;
-  }
 
-  #layout.active .menu-link {
-      left: 150px;
-  }
+#layout.active #menu {
+  left: 150px;
+  width: 150px;
+}
+
+#layout.active .menu-link {
+  left: 150px;
+}
+
 /*
 The content `<div>` is where all your content goes.
 */
@@ -67,6 +73,7 @@ The content `<div>` is where all your content goes.
   flex-direction: column;
   overflow: hidden;
 }
+
 .content {
   margin: 0 auto;
   padding: 0 2em;
@@ -78,12 +85,14 @@ The content `<div>` is where all your content goes.
   width: 100%;
   box-sizing: border-box;
 }
+
 .container {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
+
 #cardList {
   flex: 1;
   overflow-y: auto;
@@ -104,41 +113,45 @@ appears on the left side of the page.
 */
 
 #menu {
-  margin-left: -150px; /* "#menu" width */
+  margin-left: -150px;
+  /* "#menu" width */
   width: 150px;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 1000; /* so the menu or its navicon stays above all content */
+  z-index: 1000;
+  /* so the menu or its navicon stays above all content */
   background: #191818;
   overflow-y: auto;
 }
-  /*
+
+/*
   All anchors inside the menu should be styled like this.
   */
-  #menu a {
-      color: #f6f3f7;
-      border: none;
-      padding: 0.6em 0 0.6em 0.6em;
-  }
+#menu a {
+  color: #f6f3f7;
+  border: none;
+  padding: 0.6em 0 0.6em 0.6em;
+}
 
-  /*
+/*
   Remove all background/borders, since we are applying them to #menu.
   */
-   #menu .pure-menu,
-   #menu .pure-menu ul {
-      border: none;
-      background: transparent;
-  }
+#menu .pure-menu,
+#menu .pure-menu ul {
+  border: none;
+  background: transparent;
+}
 
-  /*
+/*
   Add that light border to separate items into groups.
   */
-  #menu .pure-menu ul,
-  #menu .pure-menu .menu-item-divided {
-      border-top: 1px solid #333;
-  }
+#menu .pure-menu ul,
+#menu .pure-menu .menu-item-divided {
+  border-top: 1px solid #333;
+}
+
 /*
 Change color of the anchor links on hover/focus.
 */
@@ -153,24 +166,30 @@ This styles the selected menu item `<li>`.
 #menu .pure-menu-selected {
   background: #b6a9e6;
 }
+
 #menu .pure-menu-heading {
   font-family: Geologica;
   background: #5327c3;
   font-size: 130%;
   color: #fff;
   margin: 0;
+  padding: 0.6em 0;
   text-align: center;
+  display: block;
 }
+
 .sidebar-logo-container {
   padding: 1em 0;
   text-align: center;
   background: #191818;
 }
+
 .sidebar-logo {
   max-width: 80%;
   height: auto;
   display: inline-block;
 }
+
 /*
 This styles a link within a selected menu item `<li>`.
 */
@@ -191,47 +210,51 @@ small screens.
 */
 .menu-link {
   position: fixed;
-  display: block; /* show this only on small screens */
+  display: block;
+  /* show this only on small screens */
   top: 0;
-  left: 0; /* "#menu width" */
+  left: 0;
+  /* "#menu width" */
   background: #000;
-  background: rgba(0,0,0,0.7);
-  font-size: 10px; /* change this value to increase/decrease button size */
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 10px;
+  /* change this value to increase/decrease button size */
   z-index: 10;
   width: 2em;
   height: auto;
   padding: 2.1em 1.6em;
 }
 
-  .menu-link:hover,
-  .menu-link:focus {
-      background: #000;
-  }
+.menu-link:hover,
+.menu-link:focus {
+  background: #000;
+}
 
-  .menu-link span {
-      position: relative;
-      display: block;
-  }
+.menu-link span {
+  position: relative;
+  display: block;
+}
 
-  .menu-link span,
-  .menu-link span:before,
-  .menu-link span:after {
-      background-color: #fff;
-      pointer-events: none;
-      width: 100%;
-      height: 0.2em;
-  }
+.menu-link span,
+.menu-link span:before,
+.menu-link span:after {
+  background-color: #fff;
+  pointer-events: none;
+  width: 100%;
+  height: 0.2em;
+}
 
-  .menu-link span:before,
-  .menu-link span:after {
-      position: absolute;
-      margin-top: -0.6em;
-      content: " ";
-  }
+.menu-link span:before,
+.menu-link span:after {
+  position: absolute;
+  margin-top: -0.6em;
+  content: " ";
+}
 
-  .menu-link span:after {
-      margin-top: 0.6em;
-  }
+.menu-link span:after {
+  margin-top: 0.6em;
+}
+
 /* -- Responsive Styles (Media Queries) ------------------------------------- */
 
 /*
@@ -241,30 +264,33 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 
   .header,
   .content {
-      padding-left: 2em;
-      padding-right: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
   }
 
   #layout {
-      padding-left: 150px; /* left col width "#menu" */
-      left: 0;
+    padding-left: 150px;
+    /* left col width "#menu" */
+    left: 0;
   }
+
   #menu {
-      left: 150px;
+    left: 150px;
   }
 
   .menu-link {
-      position: fixed;
-      left: 150px;
-      display: none;
+    position: fixed;
+    left: 150px;
+    display: none;
   }
 
   #layout.active .menu-link {
-      left: 150px;
+    left: 150px;
   }
 }
 
 @media (max-width: 48em) {
+
   /* Only apply this when the window is small. Otherwise, the following
   case results in extra padding on the left:
       * Make the window small.
@@ -272,10 +298,11 @@ Hides the menu at `48em`, but modify this based on your app's needs.
       * Make the window large again.
   */
   #layout.active {
-      position: relative;
-      left: 150px;
+    position: relative;
+    left: 150px;
   }
 }
+
 .hidden {
   display: none !important;
 }
