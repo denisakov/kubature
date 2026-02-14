@@ -45,9 +45,9 @@ const handleSelect = () => {
     const matchesIndustry = industrySelection === 'all' || cardIndustry === industrySelection;
 
     if (matchesComponent && matchesIndustry) {
-      card.classList.remove('hide');
+      card.classList.remove('hidden');
     } else {
-      card.classList.add('hide');
+      card.classList.add('hidden');
     }
   });
 };
