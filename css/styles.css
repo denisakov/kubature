@@ -159,6 +159,17 @@ This styles the selected menu item `<li>`.
   font-size: 130%;
   color: #fff;
   margin: 0;
+  text-align: center;
+}
+.sidebar-logo-container {
+  padding: 1em 0;
+  text-align: center;
+  background: #191818;
+}
+.sidebar-logo {
+  max-width: 80%;
+  height: auto;
+  display: inline-block;
 }
 /*
 This styles a link within a selected menu item `<li>`.
