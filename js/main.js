@@ -33,19 +33,27 @@ const handleContactSubmit = (e) => {
 };
 
 const handleSelect = () => {
-  const userSelection = document.querySelector('#case-filter').value;
-  const cards = document.querySelectorAll('portfolio-card');
-  if (userSelection == 'all') {
-    cards.forEach((card) => card.classList.remove('hide'));
-    return;
-  }
-  cards.forEach((card) => card.classList.add('hide'));
-  document.querySelectorAll(`portfolio-card[data-topics*="${userSelection.toLowerCase()}"]`)
-    .forEach((elem) => elem.classList.remove('hide'));
+  const componentSelection = document.querySelector('#case-filter').value.toLowerCase();
+  const industrySelection = document.querySelector('#type-filter').value.toLowerCase();
+  const cards = document.querySelectorAll('project-card');
+
+  cards.forEach((card) => {
+    const cardTopics = card.getAttribute('data-topics') || '';
+    const cardIndustry = (card.getAttribute('data-industry') || '').toLowerCase();
+
+    const matchesComponent = componentSelection === 'all' || cardTopics.includes(componentSelection);
+    const matchesIndustry = industrySelection === 'all' || cardIndustry === industrySelection;
+
+    if (matchesComponent && matchesIndustry) {
+      card.classList.remove('hide');
+    } else {
+      card.classList.add('hide');
+    }
+  });
 };
 
 // function showUrlsByTopic(topic) {
-//   const allCards = document.querySelectorAll('portfolio-card');
+//   const allCards = document.querySelectorAll('project-card');
 //   console.log(
 //     '\u001b[' +
 //       31 +
@@ -54,7 +62,7 @@ const handleSelect = () => {
 //       '\u001b[0m'
 //   );
 //   console.log(`Total case studies: ${allCards.length}`);
-//   const cards = topic ? document.querySelectorAll(`portfolio-card[data-topics*="${topic.toLowerCase()}"]`) : allCards;
+//   const cards = topic ? document.querySelectorAll(`project-card[data-topics*="${topic.toLowerCase()}"]`) : allCards;
 //   if (cards.length === 0) {
 //     console.log(`No cards found containing ${topic}`);
 //     return;
@@ -71,7 +79,7 @@ const handleSelect = () => {
 const toggleSelect = (value) => {
   const caseFilter = document.querySelector('#case-filter');
   const isValidValue = Array.from(caseFilter.options)
-    .filter((option) => option.attributes)
+    .filter((option) => option.attributes && option.attributes.value)
     .map((option) => option.attributes.value.nodeValue.toLowerCase())
     .some((option) => option.includes(value));
   if (!isValidValue) {
@@ -107,24 +115,46 @@ async function callDoc() {
 const ready = async () => {
   const dataJson = await callDoc();
   const cardList = document.getElementById("cardList");
+  const industryFilter = document.getElementById("type-filter");
+  const industries = new Set();
+
   cardList.innerHTML = '';
+
   for (let i = 0; i < dataJson.length; i++) {
     const card = document.createElement("project-card");
+    const industry = dataJson[i]["industry"] || "Other";
+    const topics = (dataJson[i]["technologies"] || "").toLowerCase();
+
     card.setAttribute("title", dataJson[i]["title"]);
     card.setAttribute("description", dataJson[i]["description"]);
     card.setAttribute("year", dataJson[i]["year"]);
-    card.setAttribute("industry", dataJson[i]["industry"]);
+    card.setAttribute("industry", industry);
     card.setAttribute("timePeriod", dataJson[i]["timePeriod"]);
     card.setAttribute("cost", dataJson[i]["cost"]);
     card.setAttribute("request", dataJson[i]["request"]);
     card.setAttribute("solution", dataJson[i]["solution"]);
     card.setAttribute("feedback", dataJson[i]["feedback"]);
     card.setAttribute("technologies", dataJson[i]["technologies"]);
-    //var tags = card.querySelector('tags');
+
+    // Add filtering attributes
+    card.setAttribute("data-industry", industry);
+    card.setAttribute("data-topics", topics);
 
     card.className = "item pure-u-sm-22-24 pure-u-md-11-24 pure-u-lg-8-24 pure-u-xl-6-24";
-    document.getElementById("cardList").appendChild(card);
+    cardList.appendChild(card);
+
+    if (industry) industries.add(industry);
   }
+
+  // Populate Industry Filter
+  const sortedIndustries = Array.from(industries).sort();
+  sortedIndustries.forEach(industry => {
+    const option = document.createElement("option");
+    option.value = industry;
+    option.innerText = industry;
+    industryFilter.appendChild(option);
+  });
+
   // Mobile sidenav
   const elems = document.querySelectorAll('.sidenav');
   //M.Sidenav.init(elems, {});
@@ -144,7 +174,7 @@ const ready = async () => {
   // Query param for portfolio filter
   const searchParams = new URLSearchParams(window.location.search);
   if (searchParams.has('p')) {
-    toggleSelect(searchParams.get('p'));
+    toggleSelect(searchParams.get('p').toLowerCase());
   } else {
   }
 };
