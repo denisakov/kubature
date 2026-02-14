@@ -38,10 +38,10 @@ const handleSelect = () => {
   const cards = document.querySelectorAll('project-card');
 
   cards.forEach((card) => {
-    const cardTopics = card.getAttribute('data-topics') || '';
+    const cardSearchText = (card.getAttribute('data-search') || '').toLowerCase();
     const cardIndustry = (card.getAttribute('data-industry') || '').toLowerCase();
 
-    const matchesComponent = componentSelection === 'all' || cardTopics.includes(componentSelection);
+    const matchesComponent = componentSelection === 'all' || cardSearchText.includes(componentSelection);
     const matchesIndustry = industrySelection === 'all' || cardIndustry === industrySelection;
 
     if (matchesComponent && matchesIndustry) {
@@ -123,7 +123,15 @@ const ready = async () => {
   for (let i = 0; i < dataJson.length; i++) {
     const card = document.createElement("project-card");
     const industry = dataJson[i]["industry"] || "Other";
-    const topics = (dataJson[i]["technologies"] || "").toLowerCase();
+
+    // Aggregate searchable text
+    const searchableFields = [
+      dataJson[i]["title"],
+      dataJson[i]["description"],
+      dataJson[i]["request"],
+      dataJson[i]["solution"],
+      dataJson[i]["technologies"]
+    ].filter(Boolean).join(' ').toLowerCase();
 
     card.setAttribute("title", dataJson[i]["title"]);
     card.setAttribute("description", dataJson[i]["description"]);
@@ -138,7 +146,7 @@ const ready = async () => {
 
     // Add filtering attributes
     card.setAttribute("data-industry", industry);
-    card.setAttribute("data-topics", topics);
+    card.setAttribute("data-search", searchableFields);
 
     card.className = "item pure-u-sm-22-24 pure-u-md-11-24 pure-u-lg-8-24 pure-u-xl-6-24";
     cardList.appendChild(card);
