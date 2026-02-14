@@ -158,30 +158,38 @@ div .separatorDate{
 }
 
 /* DETAILS */
+/* DETAILS */
 .popupContent {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 20px 0 20px;
   background-color: #fff;
   box-shadow: 20px 16px 20px 20px rgba(0, 0, 0, 0.2);
-  max-height: 80%; /* Set a maximum height */
-  overflow-y: auto; /* Add this property for vertical scrollbar */
+  width: 90%;
+  max-width: 800px;
+  max-height: 80%;
   z-index: 1000;
-}
-.popupBody {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
+  flex-direction: column;
 }
 .popupHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  padding: 15px 20px;
+  background: #fff;
+}
+.popupScrollArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 20px;
+}
+.popupBody {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
 }
 .column {
   width: 48%;
@@ -194,11 +202,9 @@ div .separatorDate{
   padding: 0 10px;
 }
 .popupFooter {
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  margin: 20px 20px 20px 0;
+  border-top: 1px solid #ddd;
+  padding: 15px 20px;
+  background: #f9f9f9;
 }
 .subtitle{
   font-weight: 600;
@@ -213,6 +219,7 @@ div .separatorDate{
 }
 .closeBtn {
   cursor: pointer;
+  font-size: 24px;
 }
 .popupButtons {
   text-align: center;
@@ -252,36 +259,38 @@ div .separatorDate{
       <span class="popupTitle"></span>
       <span class="closeBtn">&times;</span>
     </div>
-    <div class="popupBody">
-      <div class="column">
-        <p class="subtitle">Request</p>
-        <p class="request"></p>
+    <div class="popupScrollArea">
+      <div class="popupBody">
+        <div class="column">
+          <p class="subtitle">Request</p>
+          <p class="request"></p>
+        </div>
+        <div class="column">
+          <p class="subtitle">Solution</p>
+          <p class="solution"></p>
+        </div>
       </div>
-      <div class="column">
-        <p class="subtitle">Solution</p>
-        <p class="solution"></p>
+      <div class="popupBody">
+        <div class="column">
+          <p class="subtitle">Time Required</p>
+          <p class="time"></p>
+        </div>
+        <div class="column">
+          <p class="subtitle">Estimated Cost</p>
+          <p class="cost"></p>
+        </div>
       </div>
-    </div>
-    <div class="popupBody">
-      <div class="column">
-        <p class="subtitle">Time Required</p>
-        <p class="time"></p>
+      <div>
+        <div class="popupFullLength">
+          <p class="subtitle">Technologies</p>
+          <p class="technologies"></p>
+        </div>
       </div>
-      <div class="column">
-        <p class="subtitle">Estimated Cost</p>
-        <p class="cost"></p>
-      </div>
-    </div>
-    <div>
-      <div class="popupFullLength">
-        <p class="subtitle">Technologies</p>
-        <p class="technologies"></p>
-      </div>
-    </div>
-    <div>
-      <div class="popupFullLength">
-        <p class="subtitle">Feedback</p>
-        <p class="feedback"></p>
+      <div>
+        <div class="popupFullLength">
+          <p class="subtitle">Feedback</p>
+          <p class="feedback"></p>
+        </div>
       </div>
     </div>
     <div class="popupFooter">
@@ -321,15 +330,15 @@ class ProjectCard extends HTMLElement {
     //this.setAttribute('data-tags', this.getAttribute('tags'));
     //this.setAttribute('data-url', this.getAttribute('target'));
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    
+
     //this.shadowRoot.querySelector('img').src = this.getAttribute('image');
     this.shadowRoot.querySelector('.title').innerText = this.getAttribute('title');
     this.shadowRoot.querySelector('.description').innerText = this.getAttribute('description');
-    this.shadowRoot.querySelector('.tags').innerHTML = '<li><a href="#" class="tag" alt="">'+this.getAttribute('industry')+'</a></li>';
+    this.shadowRoot.querySelector('.tags').innerHTML = '<li><a href="#" class="tag" alt="">' + this.getAttribute('industry') + '</a></li>';
     this.shadowRoot.querySelector('.separatorDate').innerText = this.getAttribute('year');
-    
+
     const now = new Date().getMilliseconds().toString();
-    const id = this.getAttribute('title').replace(' ','').toLowerCase().substring(0,10) + now;
+    const id = this.getAttribute('title').replace(' ', '').toLowerCase().substring(0, 10) + now;
 
     this.shadowRoot.querySelector(".popupTitle").innerText = this.getAttribute('title');
     this.shadowRoot.querySelector(".request").innerText = this.getAttribute('request');
@@ -341,18 +350,18 @@ class ProjectCard extends HTMLElement {
 
     var triggerButton = this.shadowRoot.querySelector("#infoButton");
     var detailsContainer = this.shadowRoot.querySelector('.popupContent');
-    
+
     triggerButton.innerHTML = 'Details';
-      //'<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#4d4d4d}</style><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"/></svg>';
-    triggerButton.setAttribute('data-popup-id',id);
+    //'<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><style>svg{fill:#4d4d4d}</style><path d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"/></svg>';
+    triggerButton.setAttribute('data-popup-id', id);
     triggerButton.addEventListener("click", () => {
-      detailsContainer.style.display = 'block';
+      detailsContainer.style.display = 'flex';
     });
-    detailsContainer.setAttribute('id',id);
+    detailsContainer.setAttribute('id', id);
     this.shadowRoot.querySelector('.closeBtn').addEventListener('click', () => {
       detailsContainer.style.display = 'none';
     });
-    
+
     //this.shadowRoot.querySelector('.timePeriod').innerText = this.getAttribute('timePeriod');
     // const ta = this.shadowRoot.querySelector('tags');
     // const href = this.getAttribute('target');
