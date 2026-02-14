@@ -3,14 +3,22 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 @import url(https://fonts.googleapis.com/css?family=Saira:300,600);
 
-body {
+html, body {
+  height: 100%;
+  margin: 0;
   color: #777;
+  overflow: hidden;
 }
-#filterForm{
-  font-size:small;
+#filterForm {
+  font-size: small;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  padding-bottom: 0.5em;
 }
-.footer{
-  font-size:small;
+.footer {
+  font-size: small;
   text-align: center;
 }
 .pure-img-responsive {
@@ -38,6 +46,9 @@ This is the parent `<div>` that contains the menu and the content area.
   position: relative;
   left: 0;
   padding-left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
   #layout.active #menu {
       left: 150px;
@@ -50,12 +61,33 @@ This is the parent `<div>` that contains the menu and the content area.
 /*
 The content `<div>` is where all your content goes.
 */
+#main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 .content {
   margin: 0 auto;
   padding: 0 2em;
-  /*max-width: 800px;*/
-  margin-bottom: 50px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   line-height: 1.6em;
+  width: 100%;
+  box-sizing: border-box;
+}
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#cardList {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 2em;
 }
 
 .header {
