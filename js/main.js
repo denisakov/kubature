@@ -122,7 +122,8 @@ const ready = async () => {
 
   for (let i = 0; i < dataJson.length; i++) {
     const card = document.createElement("project-card");
-    const industry = dataJson[i]["industry"] || "Other";
+    const rawIndustry = dataJson[i]["industry"] || "Other";
+    const industry = rawIndustry.charAt(0).toUpperCase() + rawIndustry.slice(1).toLowerCase();
 
     // Aggregate searchable text
     const searchableFields = [

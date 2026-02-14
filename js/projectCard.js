@@ -125,7 +125,7 @@ body {
   .tag::after {
     background: #fcfcfc;
     border-bottom: 10px solid transparent;
-    border-left: 6px solid #eee;
+    border-left: 6px solid #ddd;
     border-top: 6.5px solid transparent;
     content: '';
     position: absolute;
