@@ -82,44 +82,44 @@ const toggleSelect = (value) => {
   // in some cases, this is also required:
   caseFilter.dispatchEvent(new Event('change'));
 };
-async function callDoc(){
+async function callDoc() {
   var output = [];
   var data = await fetch('https://script.google.com/macros/s/AKfycbyfhorMP1QyHKWleZcmgE4kxnn7pdARfKF_N1km--g4Ly30EX1i7l5JH4D_k3SNQgc41w/exec')
-  .then((response) => response.json())
-  .then((res) => {
-    //console.log(res);
-    var projects = res.data;
-    projects.forEach((project) => {
-      var row = {}
-      var keys = Object.keys(project);
-      for (var i = 0; i < keys.length; i++){
-        row[keys[i]] = project[keys[i]];
-      }
-      output.push(row);
+    .then((response) => response.json())
+    .then((res) => {
+      //console.log(res);
+      var projects = res.data;
+      projects.forEach((project) => {
+        var row = {}
+        var keys = Object.keys(project);
+        for (var i = 0; i < keys.length; i++) {
+          row[keys[i]] = project[keys[i]];
+        }
+        output.push(row);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
     });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
   //console.log(output);
   return output;
 }
 const ready = async () => {
   const dataJson = await callDoc();
-  //const dataEl = document.querySelector('#pureData');
-  //dataEl.innerHTML = JSON.stringify(dataJson);
-  for(let i = 0; i < dataJson.length; i++){
+  const cardList = document.getElementById("cardList");
+  cardList.innerHTML = '';
+  for (let i = 0; i < dataJson.length; i++) {
     const card = document.createElement("project-card");
-    card.setAttribute("title",dataJson[i]["title"]);
-    card.setAttribute("description",dataJson[i]["description"]);
-    card.setAttribute("year",dataJson[i]["year"]);
-    card.setAttribute("industry",dataJson[i]["industry"]);
-    card.setAttribute("timePeriod",dataJson[i]["timePeriod"]);
-    card.setAttribute("cost",dataJson[i]["cost"]);
-    card.setAttribute("request",dataJson[i]["request"]);
-    card.setAttribute("solution",dataJson[i]["solution"]);
-    card.setAttribute("feedback",dataJson[i]["feedback"]);
-    card.setAttribute("technologies",dataJson[i]["technologies"]);
+    card.setAttribute("title", dataJson[i]["title"]);
+    card.setAttribute("description", dataJson[i]["description"]);
+    card.setAttribute("year", dataJson[i]["year"]);
+    card.setAttribute("industry", dataJson[i]["industry"]);
+    card.setAttribute("timePeriod", dataJson[i]["timePeriod"]);
+    card.setAttribute("cost", dataJson[i]["cost"]);
+    card.setAttribute("request", dataJson[i]["request"]);
+    card.setAttribute("solution", dataJson[i]["solution"]);
+    card.setAttribute("feedback", dataJson[i]["feedback"]);
+    card.setAttribute("technologies", dataJson[i]["technologies"]);
     //var tags = card.querySelector('tags');
 
     card.className = "item pure-u-sm-22-24 pure-u-md-11-24 pure-u-lg-8-24 pure-u-xl-6-24";
