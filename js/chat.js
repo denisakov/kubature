@@ -115,7 +115,7 @@ async function getAIReponse(query) {
   } catch (err) {
     loading.classList.add('hidden');
     appendMessage("Sorry, I'm having trouble connecting right now.", 'bot');
-    console.log(err);
+    console.error("Gemini API Error:", err);
   }
 }
 /**
