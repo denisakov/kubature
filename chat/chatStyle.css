@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+#chat-box::-webkit-scrollbar {
+    width: 5px;
+}
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 20px;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: #2563eb;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background: white;
+    color: #334155;
+    border-bottom-left-radius: 4px;
+    line-height: 1.6;
+}
+
+.project-card {
+    background: #f8fafc;
+    border-left: 4px solid #3b82f6;
+    margin-top: 10px;
+    padding: 12px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
+
+#chat-box {
+    display: flex;
+    flex-direction: column;
+}

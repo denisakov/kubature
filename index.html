@@ -69,9 +69,21 @@
                     <option value="All">All</option>
                   </select>
                 </div>
+                <div class="pure-u-sm-4-24 pure-u-md-8-24 pure-u-lg-12-24 pure-u-xl-16-24 chat-input-container">
+                  <input type="text" id="ai-chat-input" class="pure-u-23-24"
+                    placeholder="Ask me if I can build something for you.">
+                </div>
               </div>
             </fieldset>
           </form>
+          <div id="ai-chat-window" class="chat-window-hidden">
+            <div class="chat-header">
+              <span>AI Assistant</span>
+              <span id="close-chat">&times;</span>
+            </div>
+            <div id="chat-messages"></div>
+            <div id="chat-loading" class="hidden">Thinking...</div>
+          </div>
           <div id="pureData">
           </div>
           <div class="row pure-g" id="cardList">
@@ -132,6 +144,14 @@
   <script src="./js/main.js"></script>
   <script src="./js/projectCard.js"></script>
   <script src="./js/ui.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+  <script type="module" src="./js/chat.js"></script>
 </body>
 
 </html>

@@ -32,7 +32,7 @@ const handleContactSubmit = (e) => {
     .catch((err) => console.log(err));
 };
 
-const handleSelect = () => {
+window.handleSelect = () => {
   const componentSelection = document.querySelector('#case-filter').value.toLowerCase();
   const industrySelection = document.querySelector('#type-filter').value.toLowerCase();
   const cards = document.querySelectorAll('project-card');
@@ -51,6 +51,7 @@ const handleSelect = () => {
     }
   });
 };
+const handleSelect = window.handleSelect;
 
 // function showUrlsByTopic(topic) {
 //   const allCards = document.querySelectorAll('project-card');

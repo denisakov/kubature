@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denis | Project Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-4xl w-full h-[85vh] flex flex-col bg-white shadow-2xl rounded-2xl overflow-hidden border border-slate-200">
+        <header class="bg-slate-900 p-5 text-white flex justify-between items-center">
+            <div>
+                <h1 class="font-bold text-xl tracking-tight">Denis <span class="text-blue-400">AI</span></h1>
+                <p class="text-xs text-slate-400 uppercase tracking-widest">Portfolio Concierge</p>
+            </div>
+            <div id="status-dot" class="flex items-center gap-2 text-xs font-medium text-emerald-400">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                Online
+            </div>
+        </header>
+
+        <main id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth">
+            <div class="bot-msg shadow-sm p-4 rounded-2xl max-w-[85%] border border-slate-100">
+                Hi! I'm Denis's virtual assistant. I have access to over 200 of his past project records. 
+                What would you like to know about his technical expertise?
+            </div>
+        </main>
+
+        <div id="loading" class="px-6 py-2 text-xs text-slate-400 italic hidden">Denis AI is thinking...</div>
+
+        <footer class="p-4 bg-slate-50 border-t border-slate-200">
+            <div class="flex gap-3 bg-white p-2 rounded-xl shadow-inner border border-slate-200">
+                <input type="text" id="user-input" placeholder="Ask about Gmail Add-ons, Apps Script, or performance..." 
+                       class="flex-1 px-4 py-2 focus:outline-none bg-transparent">
+                <button id="send-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-semibold transition-all">
+                    Ask
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
