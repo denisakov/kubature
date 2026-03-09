@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const API_KEY = "AIzaSyB5lbJPSp17nae9GScEkgo-cMuYBtfxW0k";
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
+  model: "gemini-1.5-flash-latest",
   generationConfig: { temperature: 0.4 }
 });
 const MESSAGES = [
@@ -37,6 +37,7 @@ async function initChat() {
   startPlaceholderRotation(input);
   input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       handleChatInput(input.value);
       input.value = '';
     }
