@@ -2,10 +2,10 @@
  * @fileoverview AI Chat Assistant for Kubature Portfolio.
  */
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const API_KEY = "AIzaSyDLxJP0R0moISWAD277YEBBmirTInJzBrY";
+const API_KEY = ""; // PASTE YOUR KEY HERE LOCALLY, DO NOT COMMIT
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
+  model: "gemini-2.0-flash",
   generationConfig: { temperature: 0.4 }
 });
 const MESSAGES = [
